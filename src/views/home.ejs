@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4b6f922cb1.js" crossorigin="anonymous"></script>
+    <title>CRUD Local Storage</title>
+</head>
+<body>
+    <header class="header_container">
+        <div class="header_elem1">
+            <p>ABM con Local Storage</p>
+        </div>
+    </header>
+    <hr>
+    <main class="main_container">
+        <div class="main_load_person">
+            <p class="main_load_person_title">Complete los campos para agregar una frase a la pared</p>
+            <br>
+            <form action="/save" method="post" class="main_load_person_form">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="Nombre" required> 
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="Apellido" required>
+                <label for="frase">Frase</label> 
+                <input type="text" id="frase" name="Frase" required maxlength="50">
+                <p></p>
+                <div>
+                    <input type="submit" name="grabar">
+                    <input type="reset" value="Borrar" name="cancelar">
+                </div>
+            </form>
+            <br>
+        </div>
+        <hr>
+        <!-- Aca comienzan los tiles con las frases  -->
+        <div class="main_load_person_phrases_cont">
+            <% if (tarjetas.length > 0) {%>
+                <% tarjetas.forEach(function(e) { %>
+                    <div class="main_load_person_phrases">
+                        <p class="main_load_person_phrases_head"><%= e.Nombre %> <%= e.Apellido %></p>
+                        <div class="main_load_person_phrases_body">
+                            <p><%= e.Frase %></p>
+                            <a href='/borrar/<%= e.id%>'><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></a>
+                        </div>
+                    </div>
+                <% }); %>
+                
+            <% } else { %>
+                <p>Pared recién pintada!</p>
+            <% } %>
+        </div>
+    </main>
+    <br>
+    <footer class="footer_container">
+        <div class="footer_container_elem1">
+            <p>©Ernesto Caballero Vieyra | 2023</p> 
+        </div>
+        <div class="footer_container_elem2">
+            <p>
+                <i class="fa-brands fa-github"></i> - <a href="https://github.com/elmono007" target="_blank"> elmono007</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
