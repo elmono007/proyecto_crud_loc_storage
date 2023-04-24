@@ -50,7 +50,6 @@ const mainController = {
         tarjetas.push(nuevaTarjeta);
 
         console.log('array despues push');
-        console.log(tarjetas);
         
         //Pasamos el contenido array a JSON y grabamos en archivo.
         const dataToFile = JSON.stringify(tarjetas);
@@ -63,7 +62,7 @@ const mainController = {
     borrar: (req, res) => {
         
         const paramId = req.params.id;
-        console.log(paramId);
+
         //Leemos el archivo, y lo buscamos dentro del array
         const filePath = path.resolve(__dirname + '../../../Database/phrases.json');
         
@@ -76,13 +75,47 @@ const mainController = {
         }
 
         const indexFrase = tarjetas.findIndex( (elem) => elem.id == paramId);
-        console.log(indexFrase);
 
         //Sacamos el elemento del indice encontrado
         //const tarjetasModificadas = 
         tarjetas.splice(indexFrase, 1);
+
+        const dataToFile = JSON.stringify(tarjetas);
+
+        fs.writeFileSync(filePath, dataToFile);
+      
+        //Luego de borrar y grabar el archivo vamos al Home
+        res.redirect('/');
+
+    },
+
+    editar: (req, res) => {
+
+        const idTarjeta = req.body.editId;                //Tomamos el id de la tarjeta.
+        console.log(idTarjeta);
+
+        //Leemos el archivo, y lo buscamos dentro del array
+        const filePath = path.resolve(__dirname + '../../../Database/phrases.json');
+
+        //Leemos el contenido del archivo y lo pasamos de formato JSON a JS
+        const dataFromFile = fs.readFileSync(filePath);
+        let tarjetas = []; 
+        
+        if (dataFromFile != '') {
+            tarjetas = JSON.parse(dataFromFile);
+        }
+        
         console.log(tarjetas);
 
+        const indexFrase = tarjetas.findIndex( (elem) => elem.id == idTarjeta);
+        console.log(indexFrase);
+
+        //Modificamos con los campos del formulario.
+        tarjetas[indexFrase].Nombre = req.body.nombreEdit;
+        tarjetas[indexFrase].Apellido = req.body.apellidoEdit;
+        tarjetas[indexFrase].Frase = req.body.fraseEdit;
+        
+        
         const dataToFile = JSON.stringify(tarjetas);
 
         fs.writeFileSync(filePath, dataToFile);

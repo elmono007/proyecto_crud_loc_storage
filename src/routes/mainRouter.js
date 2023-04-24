@@ -14,5 +14,6 @@ router.get('/borrar/:id', mainController.borrar);
 // RutasPost 
 router.post('/save', mainController.save);
 
+router.post('/editar', mainController.editar);
 
 module.exports = router;

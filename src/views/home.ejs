@@ -23,7 +23,7 @@
         <div class="main_load_person">
             <p class="main_load_person_title">Complete los campos para agregar una frase a la pared</p>
             <br>
-            <form action="/save" method="post" class="main_load_person_form">
+            <form action="/save" method="post" class="main_load_person_form" name="load_person_form">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="Nombre" required> 
                 <label for="apellido">Apellido</label>
@@ -47,7 +47,10 @@
                         <p class="main_load_person_phrases_head"><%= e.Nombre %> <%= e.Apellido %></p>
                         <div class="main_load_person_phrases_body">
                             <p><%= e.Frase %></p>
-                            <a href='/borrar/<%= e.id%>'><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></a>
+                            <span>
+                                <a href='/borrar/<%= e.id%>'><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></a>
+                                <a href="javascript:openForm(<%= e.id%>)"><i class="fa-solid fa-pencil" style="color: #ffffff;"></i></a>
+                            </span>
                         </div>
                     </div>
                 <% }); %>
@@ -55,6 +58,21 @@
             <% } else { %>
                 <p>Pared recién pintada!</p>
             <% } %>
+        </div>
+        <div class="editForm-popup" id="myEditForm">
+            <form action="/editar" class="editForm-container" name="editForm" method="post">
+                <input type="hidden" name="editId" id="editId" >
+                <label for="nombreEdit">Nombre</label>
+                <input type="text" id="nombreEdit" name="nombreEdit" required> 
+                <label for="apellidoEdit">Apellido</label>
+                <input type="text" id="apellidoEdit" name="apellidoEdit" required>
+                <label for="fraseEdit">Frase</label> 
+                <input type="text" id="fraseEdit" name="fraseEdit" required maxlength="50">
+                <button type="submit">Grabar</button>
+                <button type="reset">Borrar</button>
+                <button type="reset" onclick="closeForm()">Cerrar</button>
+
+            </form>
         </div>
     </main>
     <br>
@@ -68,5 +86,20 @@
             </p>
         </div>
     </footer>
+
+    <!-- Script para Java en el front-->
+    <script>
+        function openForm(idTarjeta) {
+    
+            document.forms["editForm"]["editId"].value = idTarjeta;
+            document.getElementById("myEditForm").style.display = "block";
+    
+        }
+
+        function closeForm() {
+            document.getElementById("myEditForm").style.display = "none";   
+        }
+    </script>
 </body>
 </html>
+
