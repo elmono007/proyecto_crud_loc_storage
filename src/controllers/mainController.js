@@ -6,7 +6,7 @@ const mainController = {
 
     home: (req, res) => {
 
-        const filePath = path.resolve(__dirname + '../../../Database/phrases.json');
+        const filePath = path.resolve(__dirname + '../../../database/phrases.json');
         const data = fs.readFileSync(filePath, 'utf8');   //Abro el archivo con encoding utf-8    
         let tarjetas = [];
 
@@ -22,7 +22,7 @@ const mainController = {
 
     save: (req, res) => {
         
-        const filePath = path.resolve(__dirname + '../../../Database/phrases.json');
+        const filePath = path.resolve(__dirname + '../../../database/phrases.json');
         
         //Leemos el contenido del archivo y lo pasamos de formato JSON a JS
         const dataFromFile = fs.readFileSync(filePath);
@@ -62,7 +62,7 @@ const mainController = {
         const paramId = req.params.id;
 
         //Leemos el archivo, y lo buscamos dentro del array
-        const filePath = path.resolve(__dirname + '../../../Database/phrases.json');
+        const filePath = path.resolve(__dirname + '../../../database/phrases.json');
         
         //Leemos el contenido del archivo y lo pasamos de formato JSON a JS
         const dataFromFile = fs.readFileSync(filePath);
@@ -92,7 +92,7 @@ const mainController = {
         const idTarjeta = req.body.editId;                //Tomamos el id de la tarjeta.
 
         //Leemos el archivo, y lo buscamos dentro del array
-        const filePath = path.resolve(__dirname + '../../../Database/phrases.json');
+        const filePath = path.resolve(__dirname + '../../../database/phrases.json');
 
         //Leemos el contenido del archivo y lo pasamos de formato JSON a JS
         const dataFromFile = fs.readFileSync(filePath);
