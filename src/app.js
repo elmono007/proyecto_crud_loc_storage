@@ -11,7 +11,6 @@ const app = express();
 // Seteamos la ruta de los archivos estáticos en la carpeta Public
 const publicPath = path.resolve(__dirname + '../../public');
 app.use( express.static(publicPath) );
-console.log(publicPath);
 
 // Usamos para el POST del Form URL Encoded
 app.use(express.urlencoded({ extended: true }));
