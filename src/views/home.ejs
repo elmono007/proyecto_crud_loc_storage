@@ -49,7 +49,7 @@
                             <p><%= e.Frase %></p>
                             <span>
                                 <a href='/borrar/<%= e.id%>'><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></a>
-                                <a href="javascript:openForm(<%= e.id%>)"><i class="fa-solid fa-pencil" style="color: #ffffff;"></i></a>
+                                <a href='javascript:openForm("<%= e.id%>", "<%= e.Nombre%>", "<%= e.Apellido%>", "<%= e.Frase%>")'><i class="fa-solid fa-pencil" style="color: #ffffff;"></i></a>
                             </span>
                         </div>
                     </div>
@@ -67,11 +67,10 @@
                 <label for="apellidoEdit">Apellido</label>
                 <input type="text" id="apellidoEdit" name="apellidoEdit" required>
                 <label for="fraseEdit">Frase</label> 
-                <input type="text" id="fraseEdit" name="fraseEdit" required maxlength="50">
+                <input type="text" id="fraseEdit" name="fraseEdit" required maxlength="50" required>
                 <button type="submit">Grabar</button>
                 <button type="reset">Borrar</button>
                 <button type="reset" onclick="closeForm()">Cerrar</button>
-
             </form>
         </div>
     </main>
@@ -89,9 +88,12 @@
 
     <!-- Script para Java en el front-->
     <script>
-        function openForm(idTarjeta) {
+        function openForm(idTarjeta, nombre, apellido, frase) {
     
             document.forms["editForm"]["editId"].value = idTarjeta;
+            document.forms["editForm"]["nombreEdit"].value = nombre;
+            document.forms["editForm"]["apellidoEdit"].value = apellido;
+            document.forms["editForm"]["fraseEdit"].value = frase;
             document.getElementById("myEditForm").style.display = "block";
     
         }
